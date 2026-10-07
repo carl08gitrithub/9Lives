@@ -1,11 +1,22 @@
-function love.load()
-    x = 200
-end
+local Player = require("player")
+local World = require("world")
 
-function love.draw()
-    love.graphics.rectangle("line", x, 50, 200, 150)
+local player
+local world
+
+function love.load()
+    love.window.setTitle("9Lives")
+    love.window.setMode(960, 540)
+
+    world = World.new()
+    player = Player.new(100, 300)
 end
 
 function love.update(dt)
-    x = x + 5*dt
+    player:update(dt, world)
+end
+
+function love.draw()
+    world:draw()
+    player:draw()
 end
